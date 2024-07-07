@@ -74,30 +74,40 @@ export default {
             let jwtKey = response.jwtKey;
             let role = response.role
             let user_id = response.id
-
-            let userObject = {
+            if(jwtKey) {
+              let userObject = {
                 jwtKey: "Bearer " + jwtKey,
-                user_id: user_id ,
+                user_id: user_id,
                 user_role: role
+              }
+              Cookie.set('jwt-token', userObject.jwtKey);
+              Cookie.set('userId', userObject.user_id);
+              Cookie.set('userRole', userObject.user_role);
+              localStorage.userObject = userObject;
+              this.$router.push("/dashboard");
             }
-            Cookie.set('jwt-token', userObject.jwtKey);
-            Cookie.set('userId', userObject.user_id);
-            Cookie.set('userRole', userObject.user_role);
-            localStorage.userObject = userObject;
-            this.$router.push("/dashboard");
+            else {
+              this.makeToast()
+              this.$router.push("/login");
+            }
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
           console.log(errorCode);
           console.log(errorMessage);
-          
-          console.log("Deu Ruim menor");
         });
     },
     moveToRegister() {
       this.$router.push("/register");
     },
+    makeToast(append = false) {
+      this.$bvToast.toast(`Login/senha invalida`, {
+        autoHideDelay: 1000,
+        appendToast: append,
+        variant : 'danger'
+      })
+    }
   },
 };
 </script>
