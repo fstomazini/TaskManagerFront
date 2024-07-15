@@ -18,4 +18,15 @@ npm run build
 npm run build --report
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+## Users:
+``` bash
+user = admin@exemplo.com
+password = senhaForte123
+ou
+user = user@exemplo.com
+password = senhaFraca123
+```
+
+To run this application it is also necessary to run the Backend which can be found at:
+https://github.com/fstomazini/TaskManagerBackend.git
+
